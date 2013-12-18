@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Home Page">
+    <meta name="author" content="Sai Priyatham">
+    <link rel="shortcut icon" href="images/favicon.jpg">
+
+    <title>Priyatham</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.css">
+    <!-- Bootstrap theme -->
+    <link href="stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/theme.css" rel="stylesheet">
+
+  <style id="holderjs-style" type="text/css"></style></head>
+  <body style="">
+    <!---->
+    <div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '1442861882608693',                        // App ID from the app dashboard
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+
+     FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          FB.api('/me', function(response) {
+            //alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+            //var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+            $("#greeting").html("Hello, " + response.first_name + "!" );
+            //var phpmail = <?php echo mail_me(first_name);?>
+            $.ajax({
+              url: './php/log.php',
+              type: 'POST',
+              data: {name: response.name},
+              success: function (data) {
+                console.log(data);
+              }
+            });
+          });
+        } else if (response.status === 'not_authorized') {
+          FB.login(function(resp) {
+            if (resp.authResponse) {
+              window.location.reload();
+            }
+          });
+        } else {
+        }
+      });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(){
+     // If we've already installed the SDK, we're done
+     if (document.getElementById('facebook-jssdk')) {return;}
+
+     // Get the first script element, which we'll use to find the parent node
+     var firstScriptElement = document.getElementsByTagName('script')[0];
+
+     // Create a new script element and set its id
+     var facebookJS = document.createElement('script'); 
+     facebookJS.id = 'facebook-jssdk';
+
+     // Set the new script's source to the source of the Facebook JS SDK
+     facebookJS.src = 'http://connect.facebook.net/en_US/all.js';
+
+     // Insert the Facebook JS SDK into the DOM
+     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+   }());
+</script>
+    <!---->
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" id="my_name">Sai Priyatham</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active" id="id_home_but"><a href="/#" id="home_but">Home</a></li>
+            <li id="id_about_me_but"><a href="#about_me" id="about_me_but">About Me</a></li>
+            <li id="id_projects_but"><a href="#projects" id="projects_but">Projects</a></li>
+            <li id="id_contact_but"><a href="#contact" id="contact_but">Contact</a></li>
+            <li id="id_interests_but"><a href="#interests" id="interests_but">Interests</a></li>
+            <li id="id_resume_but"><a href="#" id="resume_but" data-toggle="modal" data-target="#myModal">Résumé</a></li>
+    <!--style type="text/css">
+    .form-control {
+      margin-left: 130px;
+    }
+    .btn.btn-default {
+      margin-left: 130px;
+    }
+    </style-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="jumbotron" id="home">
+        <h1 id="greeting">Hello!</h1>
+        <img id="dp" align="right" class="img-thumbnail" alt="dp" style="width: 300px; height: 300px;" src="images/prof_pic.jpg"></h1>
+        <h2>I am Sai Priyatham</h2>
+        <p>
+          If you do know me, you should probably be looking for me <a href="https://www.google.co.in/maps/preview#!q=hostel+7%2C+iit+bombay&data=!4m15!2m14!1m13!1s0x3be7b8077715b043%3A0xa88d4c2cd683b2bd!3m8!1m3!1d14881!2d72.9117501!3d19.1327889!3m2!1i1439!2i758!4f13.1!4m2!3d19.13414!4d72.907783">here</a>. <br>
+          However, if you don't know much about me, you have come to the right place.
+        </p>
+        <p><a href="#" class="btn btn-primary btn-lg" role="button" id="form_but">Trivia »</a>
+                <span class="alert alert-success" id="surprise">
+      </span>
+        </p>
+              <div class="page-header">
+      </div>
+        <form role="form" id="form" method="post">
+  <div class="form-group">
+    <label for="Name">Your Name</label>
+    <input type="text" class="form-control" id="name" placeholder="John Doe" name="name">
+  </div>
+  <div class="form-group">
+    <label for="Message">Your Message</label>
+    <input type="text" class="form-control" id="message" placeholder="Hello" name="message">
+  </div>
+  <button type="submit" class="btn btn-default" name="send_but" id="send_but">Send</button>
+</form>
+    </div>
+    <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="about_me">About Me</h3>
+            </div>
+            <div class="panel-body">
+              Hi again, I am Sai Priyatham, a Sophomore majoring in Electrical Engineering at IIT Bombay. I am from Tirupati, Andhra Pradesh. I have been studying at IIT Bombay since 2012 after clearing IIT-JEE 2012. I am currently a Convener of <abbr title="Web and Coding Club"><a href="http://www.wncc-iitb.org">WnCC</a></abbr>, IIT Bombay. Getting here has been my privilege. Though the time I have spent here so far has not exactly been smooth, I have certainly learnt a lot and I am sure I will learn more.
+              <br>Please read on...
+            </div>
+          </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="projects">Projects</h3>
+            </div>
+            <div class="panel-body">
+              <strong>Rubik's Cube Solver</strong><br>
+              <p>
+                This was my first big C++ project. As the name clearly says, it is a program that will solve the Rubik's Cube using layer by layer method. I did this for my CS101 course.<br>
+                <strong><a href="https://github.com/kmspriyatham/rubik_cube">Fork</a></strong>
+              </p>
+              <hr>
+              <strong>Search</strong><br>
+              <p>
+                Search is a Python program (which has now been converted to a stand alone Mac OS X application using py2app) that indexes your hard drive and allows you to search for files using their names. It supports actions like Open, Rename, Delete very much like Spotlight on OS X.<br>
+                <strong><a href="https://github.com/kmspriyatham/search">Fork</a></strong>
+              </p>
+              <hr>
+              <strong>Symath</strong><br>
+              <p>
+                This is a project I am currently working on. It's an online numerical computation package that leverages the power of Google App Engine and the simplicity of Python allowing you to save your work directly to your google account and much more.<br>
+                <strong><a href="https://github.com/kmspriyatham/symath">Fork</a></strong>
+              </p>
+              <hr>
+              <strong>Home Page</strong><br>
+              <p>
+                This page you are reading right now has been made with Facebook API, Bootstrap CSS, Bootstrap JavaScript and jQuery. As you can see it uses
+                it uses the power of the aforementioned packages to give some personalised and sleek user experience.<br>
+                <strong><a href="https://github.com/kmspriyatham/home_page">Fork</a></strong>
+              </p>
+            </div>
+          </div>
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="contact">Contact</h3>
+            </div>
+            <div class="panel-body">
+
+              <strong>If you wanna send me a box of chocolates, here's my address</strong>
+              <address>
+                Room No: 81<br>
+                Hostel 7<br>
+                IIT Bombay<br>
+                Mumbai - 400076<br>
+                </address>
+                <hr>
+                <strong>You can mail me at</strong>
+                <address>
+                <a href="mailto:kmspriyatham@gmail.com">kmspriyatham@gmail.com</a> or 
+                <a href="mailto:120070046@iitb.ac.in">120070046@iitb.ac.in</a>
+              </address>
+                <hr>
+              <strong>Or you can have a quick chat with me on <a href="https://www.facebook.com/kmspriyatham">Facebook</a> or hangout with me on <a href="https://plus.google.com/u/0/+SaiPriyathamKattakinda/about">Google+</a></strong>
+              <hr>
+              <strong>Tring Tring</strong> <br>
+              +91-75061-34472
+            </div>
+          </div>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="interests">Interests</h3>
+            </div>
+            <div class="panel-body">
+              <strong>Research</strong><br>
+              <p>
+                If you are lucky enough, you might have seen in the Trivia that I am really interested in research. For me, it's because research  allows me to think about any problem I like in a novel way and I believe that when you truly love what you are doing, you can work wonders. Hope that some day I find the problem of my dreams.
+              </p>
+              <p>
+                As of now, I find the following fields particularly interesting.
+                <ul>
+                  <li><a href="http://en.wikipedia.org/wiki/Natural_language_processing">Natural Language Processing</a></li>
+                  <li><a href="http://en.wikipedia.org/wiki/Quantum_computer">Quantum Computing</a></li>
+                  <li><a href="http://en.wikipedia.org/wiki/Symbolic_computation">Symbolic Computation</a></li>
+                  <li><a href="http://en.wikipedia.org/wiki/Distributed_artificial_intelligence">Distributed Artificial intelligence</a></li>
+                  <li><a href="http://en.wikipedia.org/wiki/Cryptography">Cryptography & Cryptanalysis</a></li>
+                </ul>
+              </p>
+              <hr>
+              <strong>Programming</strong><br>
+              <p>
+                <img src="http://projecteuler.net/profile/kmspriyatham.png" id="pe" align="right" alt="Project Euler">
+                Programming has been and always will be at the top of my Interests. I am more interested in problem solving than software development. <br> I participate on sites like <a href="http://www.hackerrank.com">Hackerrank</a>, <a href="http://www.codechef.com">CodeChef</a> whenever I have time and I really like the problems on <a href="http://www.projecteuler.net">Project Euler</a>.<br> C++ is the language of my choice for problem solving as it's fast. On the other hand I use Python for my other development projects because it's simple and less bug-prone. I always use <a href="http://developer.apple.com/xcode">Xcode</a> for programming in C++  and <a href="http://www.sublimetext.com/2">Sublime Text 2</a> for everything else.
+              </p>
+              <hr>
+              <strong>Sports</strong><br>
+              I have been playing Badminton since my high school days. I have learnt and played Squash for my NSO in my Freshmen year at IIT Bombay, which resulted in me representing my hostel for the Squash GC . I have also started playing Basket Ball fairly recently.
+              <hr>
+              <strong>Websites</strong><br>
+              The following are the websites I visit the most when my grey cells tingle with excitement or when they are tired after a day's work.
+              <dl class="dl-horizontal">
+                <dt><a href="http://www.quora.com">Quora</a></dt>
+                <dd>
+                  A Q&A site for questions about everything, literally. 
+                </dd>
+                <dt><a href="http://math.stackexchange.com">Math StackExchange</a></dt>
+                <dd>
+                  Another Q&A site dedicated for Mathematics. You can learn a ton of math by reading, asking and answering the questions on this site.
+                </dd>
+                <dt><a href="http://www.udacity.com">Udacity</a></dt>
+                <dd>
+                  A great site with really interesting online courses that engage the learner using a <abbr title="Do It Yourself">DIY</abbr> approach.
+                </dd>
+                <dt><a href="http://www.duolingo.com">Duolingo</a></dt>
+                <dd>
+                  It's a great site for learning foreign languages. I am currently learning Spanish on this site. 
+                </dd>
+                <dt><a href="http://www.imdb.com"><abbr title="Internet Movie Database">IMDb</abbr></a></dt>
+                <dd>
+                  It's my one-stop destination to know anything about movies.
+                </dd>
+              </dl>
+              <hr>
+              <strong>Games</strong><br>
+              The following are the games I played that are worth mentioning due to their interesting and engaging gameplay.
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Platform</th>
+                    <th>Genre</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>1</td>
+                  <td><a href="www.needforspeed.com/most-wanted">Need for Speed: Most Wanted</a></td>
+                  <td>Windows XP</td>
+                  <td>Racing</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><a href="www.ea.com/need-for-speed-carbon‎">Need for Speed: Carbon</a></td>
+                  <td>PS 2</td>
+                  <td>Racing</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><a href="http://us.playstation.com/games/god-of-war-ii-ps2.html">God of War II</a></td>
+                  <td>PS 2</td>
+                  <td>Action-Adventure</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><a href="http://www.limbogame.org">Limbo</a></td>
+                  <td>Mac OS X</td>
+                  <td>Puzzle</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><a href="https://itunes.apple.com/in/app/asphalt-8-airborne/id610391947">Asphalt 8: Airborne</a></td>
+                  <td>iPad</td>
+                  <td>Racing</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><a href="https://play.google.com/store/apps/details?id=com.zeptolab.timetravel.free.google">Cut the Rope: Time Travel</a></td>
+                  <td>Android</td>
+                  <td>Puzzle</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><a href="https://play.google.com/store/apps/details?id=com.zeptolab.monsters.free.google">Pudding Monsters</a></td>
+                  <td>Android</td>
+                  <td>Puzzle</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><a href="http://www.ea.com/black">Black</a></td>
+                  <td>PS 2</td>
+                  <td>First Person Shooter</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirdsspace.ads">Angry Birds: Space</a></td>
+                  <td>Android</td>
+                  <td>Puzzle</td>
+                </tr>
+              </table>
+              <hr>
+              <strong>Movies</strong><br>
+              <p>I watch a lot of (Animation, Sci-Fi, Superhero) movies, infact I have compiled a list of almost all the movies I have watched which can be found <a href="pdf/movie_log.pdf">here</a>.<br> My favourite actors are
+              <ul>
+               <li><a href="http://www.imdb.com/name/nm0000375/‎">Robert Downey Jr.</a></li>
+               <li><a href="http://www.imdb.com/name/nm0000138/">Leonardo DiCaprio</a></li>
+              <li><a href="http://www.imdb.com/name/nm0413168/">Hugh Jackman</a></li>
+              <li><a href="http://www.imdb.com/name/nm0000288/‎">Christian Bale</a></li>
+              <li><a href="http://www.imdb.com/name/nm0000226/‎">Will Smith</a></li>
+               </ul>
+                and actresses are 
+                <ul>
+                  <li><a herf="http://www.imdb.com/name/nm0000239/">Liv Tyler</a></li>
+                  <li><a href="http://www.imdb.com/name/nm0000701/‎">Kate Winslet</a></li>
+                  <li><a href="http://www.imdb.com/name/nm2225369/">Jennifer Lawrence</a></li>
+                </ul>
+              </p>
+            </div>
+          </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Résumé</h4>
+      </div>
+      <div class="modal-body">
+        <object data="pdf/resume.pdf" width="900" height="550" alt="resume.pdf"></object>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+      <div class="well well-sm">
+        <p>© Sai Priyatham, 2013. CSS Design by <a href="http://www.getbootstrap.com">Bootstrap</a> licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.<br>
+          Page best viewed on Google Chrome.<br>
+          Please notify of any issues regarding this page on GitHub.</p>
+      </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="scripts/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <!--script src="scripts/jquery-1.10.2.min.js"></script-->
+    <script src="scripts/holder.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/home_page.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
+    <style type="text/css">
+    #pe {
+      margin-top: -1.5%;
+    }
+    </style>
+  </body>
+</html>
