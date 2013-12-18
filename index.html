@@ -29,14 +29,6 @@
         if (response.status === 'connected') {
           FB.api('/me', function(response) {
             $("#greeting").html("Hello, " + response.first_name + "!" );
-            $.ajax({
-              url: './php/log.php',
-              type: 'POST',
-              data: {name: response.name},
-              success: function (data) {
-                console.log(data);
-              }
-            });
           });
         } else if (response.status === 'not_authorized') {
           FB.login(function(resp) {
