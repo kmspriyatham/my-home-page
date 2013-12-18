@@ -10,35 +10,25 @@
 
     <title>Priyatham</title>
 
-    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="stylesheets/bootstrap.css">
-    <!-- Bootstrap theme -->
     <link href="stylesheets/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="stylesheets/theme.css" rel="stylesheet">
 
   <style id="holderjs-style" type="text/css"></style></head>
   <body style="">
-    <!---->
     <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
-    // init the FB JS SDK
     FB.init({
-      appId      : '1442861882608693',                        // App ID from the app dashboard
-      status     : true,                                 // Check Facebook Login status
-      xfbml      : true                                  // Look for social plugins on the page
+      appId      : '1442861882608693',                       
+      status     : true,                                 
+      xfbml      : true                                
     });
-
-    // Additional initialization code such as adding Event Listeners goes here
 
      FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
           FB.api('/me', function(response) {
-            //alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
-            //var img_link = "http://graph.facebook.com/"+response.id+"/picture"
             $("#greeting").html("Hello, " + response.first_name + "!" );
-            //var phpmail = <?php echo mail_me(first_name);?>
             $.ajax({
               url: './php/log.php',
               type: 'POST',
@@ -60,27 +50,19 @@
 
   };
 
-  // Load the SDK asynchronously
   (function(){
-     // If we've already installed the SDK, we're done
      if (document.getElementById('facebook-jssdk')) {return;}
 
-     // Get the first script element, which we'll use to find the parent node
      var firstScriptElement = document.getElementsByTagName('script')[0];
 
-     // Create a new script element and set its id
      var facebookJS = document.createElement('script'); 
      facebookJS.id = 'facebook-jssdk';
 
-     // Set the new script's source to the source of the Facebook JS SDK
      facebookJS.src = 'http://connect.facebook.net/en_US/all.js';
 
-     // Insert the Facebook JS SDK into the DOM
      firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
    }());
 </script>
-    <!---->
-        <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -100,16 +82,8 @@
             <li id="id_contact_but"><a href="#contact" id="contact_but">Contact</a></li>
             <li id="id_interests_but"><a href="#interests" id="interests_but">Interests</a></li>
             <li id="id_resume_but"><a href="#" id="resume_but" data-toggle="modal" data-target="#myModal">Résumé</a></li>
-    <!--style type="text/css">
-    .form-control {
-      margin-left: 130px;
-    }
-    .btn.btn-default {
-      margin-left: 130px;
-    }
-    </style-->
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
 
@@ -345,7 +319,6 @@
               </p>
             </div>
           </div>
-<!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -359,19 +332,16 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
       <div class="well well-sm">
         <p>© Sai Priyatham, 2013. CSS Design by <a href="http://www.getbootstrap.com">Bootstrap</a> licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.<br>
           Page best viewed on Google Chrome.<br>
           Please notify of any issues regarding this page on GitHub.</p>
       </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="scripts/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="scripts/bootstrap.min.js"></script>
-    <!--script src="scripts/jquery-1.10.2.min.js"></script-->
     <script src="scripts/holder.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/home_page.js"></script>
